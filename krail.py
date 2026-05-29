@@ -91,24 +91,24 @@ def show1():
             count_str = spinbox.get()
 
             if name == "":
-                messagebox.showerror("Error", "Please enter passenger name")
+                messagebox.showerror("ERROR", "Please enter PASSENGER NAME")
                 return
             if detail == "":
-                messagebox.showerror("Error", "Please select a train")
+                messagebox.showerror("ERROR", "Please select a TRAIN")
                 return
             if count_str == "":
-                messagebox.showerror("Error", "Please enter ticket count")
+                messagebox.showerror("ERROR", "Please enter TICKET COUNT")
                 return
 
             try:
                 requested_tickets = int(count_str)
             except ValueError:
-                messagebox.showerror("Error", "Ticket count must be a number")
+                messagebox.showerror("ERROR", "Ticket count must be a number")
                 return
 
             # Check if selected train exists in defined limits dictionary
             if detail not in TRAIN_LIMITS:
-                messagebox.showerror("Error", "Selected train capacity configurations missing")
+                messagebox.showerror("ERROR", "Selected train capacity configurations missing")
                 return
 
             max_limit = TRAIN_LIMITS[detail]
@@ -122,7 +122,7 @@ def show1():
 
             # Rule 1: Check if train limit has already peaked
             if total_booked >= max_limit:
-                messagebox.showerror("Error", "Ticket finished")
+                messagebox.showerror("ERROR", "TICKETS FINISHED")
                 update_remaining_display()
                 return
 
@@ -146,12 +146,12 @@ def show1():
 
             receipt = (
                 f"TICKET BOOKED SUCCESSFULLY!\n\n"
-                f"Ticket No: {ticket_no}\n"
-                f"Passenger Name: {name}\n"
-                f"Train: {detail}\n"
-                f"Tickets: {requested_tickets}"
+                f"TICKET NO: {ticket_no}\n"
+                f"PASSENGER NAME: {name}\n"
+                f"TRAIN: {detail}\n"
+                f"TICKETS: {requested_tickets}"
             )
-            messagebox.showinfo("Booking Confirmed", receipt)
+            messagebox.showinfo("BOOKING CONFIRMED", receipt)
             print("Data inserted safely")
             
             update_remaining_display()
@@ -180,7 +180,7 @@ def close():
 
 def cancel():
     cancel_window = tk.Toplevel(root)
-    cancel_window.title("Cancel Train")
+    cancel_window.title("CANCELK TRAIN")
     cancel_window.geometry("500x300")
     cancel_window.config(bg="#ffffff")
 
@@ -194,7 +194,7 @@ def cancel():
         tick_no = entryy.get().strip()
 
         if tick_no == "":
-            messagebox.showerror("Error", "Please enter your Ticket Number")
+            messagebox.showerror("ERROR", "Please enter your TICKET NUMBER")
             return
 
         cursor.execute("SELECT passenger_name, train_name, ticket_count FROM train WHERE id = %s", (tick_no,))
@@ -208,15 +208,15 @@ def cancel():
 
             cancellation_receipt = (
                 f"TICKET CANCELED SUCCESSFULLY!\n\n"
-                f"Ticket No: {tick_no}\n"
-                f"Passenger: {p_name}\n"
-                f"Train: {t_name}\n"
-                f"Tickets Canceled: {t_count}"
+                f"TICKET NO: {tick_no}\n"
+                f"PASSANGER: {p_name}\n"
+                f"TRAIN: {t_name}\n"
+                f"TICKETS CANCELED: {t_count}"
             )
-            messagebox.showinfo("Success", cancellation_receipt)
+            messagebox.showinfo("SUCCESS", cancellation_receipt)
             cancel_window.destroy()
         else:
-            messagebox.showwarning("Not Found", "No matching booking found with that Ticket Number")
+            messagebox.showwarning("NOT FOUND ", "No matching booking found with that TICKET NUMBER")
 
     btn_submit = tk.Button(
         cancel_window,

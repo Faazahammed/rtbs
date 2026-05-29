@@ -1,4 +1,4 @@
-import tkinter as tk
+'''import tkinter as tk
 from tkinter import messagebox
 from tkinter.ttk import Combobox
 import mysql.connector
@@ -175,4 +175,4 @@ btn5.place(x=1200, y=200, width=350, height=50)
 btn6 = tk.Button(root, text="EXIT PAGE", font=("Arial", 15), bg="#03818C", fg="#ffffff", command=close)
 btn6.place(x=1200, y=300, width=350, height=50)
 
-root.mainloop()
+root.mainloop()'''
