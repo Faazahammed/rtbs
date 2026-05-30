@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter.ttk import Combobox
 import mysql.connector
-
+from tkinter import Listbox
+from tkinter import END
 # Database connection
 conn = mysql.connector.connect(
     host="localhost",
@@ -20,7 +21,7 @@ root.config(bg="#ffffff")
 root.title("KRAIL")
 root.geometry("2000x2500")
 label = tk.Label(root, text="KRAIL ONLINE PLATFORM", fg="#1e1e1e", font=("classic", 20), bg="#ffffff")
-label.pack()
+label.pack(padx=10)
 root.resizable(True, True)
 
 # Define unique ticket capacity limits per train string match
@@ -151,7 +152,10 @@ def show1():
                 f"TRAIN: {detail}\n"
                 f"TICKETS: {requested_tickets}"
             )
-            messagebox.showinfo("BOOKING CONFIRMED", receipt)
+            receipt_listbox = Listbox(root, width=45, height=8,font=("arial",18))
+            receipt_listbox.place(x=450,y=550)
+            for line in receipt.split("\n"):
+                receipt_listbox.insert (END, line)
             print("Data inserted safely")
             
             update_remaining_display()
@@ -181,7 +185,7 @@ def close():
 def cancel():
     cancel_window = tk.Toplevel(root)
     cancel_window.title("CANCELK TRAIN")
-    cancel_window.geometry("500x300")
+    cancel_window.geometry("600x500")
     cancel_window.config(bg="#ffffff")
 
     labely = tk.Label(cancel_window, text="ENTER TICKET NUMBER", fg="#1e1e1e", bg="#ffffff", font=("arial", 14))
@@ -213,7 +217,10 @@ def cancel():
                 f"TRAIN: {t_name}\n"
                 f"TICKETS CANCELED: {t_count}"
             )
-            messagebox.showinfo("SUCCESS", cancellation_receipt)
+            receipt_listbox = Listbox(root, width=45, height=8,font=("arial",18))
+            receipt_listbox.place(x=450,y=50)
+            for line in cancellation_receipt.split("\n"):
+                receipt_listbox.insert (END, line)
             cancel_window.destroy()
         else:
             messagebox.showwarning("NOT FOUND ", "No matching booking found with that TICKET NUMBER")
@@ -229,12 +236,12 @@ def cancel():
     btn_submit.pack(pady=20)
 
 btn1 = tk.Button(root, text="VIEW TRAIN OPTIONS", font=("Arial", 15), bg="#03818C", fg="#ffffff", command=show1)
-btn1.place(x=520, y=40, width=500, height=45)
+btn1.place(x=10, y=40, width=400, height=50)
 
 btn5 = tk.Button(root, text="CANCEL TRAIN", font=("Arial", 15), bg="#03818C", fg="#ffffff", command=cancel)
-btn5.place(x=1200, y=200, width=350, height=50)
+btn5.place(x=10, y=150, width=400, height=50)
 
 btn6 = tk.Button(root, text="EXIT PAGE", font=("Arial", 15), bg="#03818C", fg="#ffffff", command=close)
-btn6.place(x=1200, y=300, width=350, height=50)
+btn6.place(x=10, y=250, width=400, height=50)
 
 root.mainloop()
